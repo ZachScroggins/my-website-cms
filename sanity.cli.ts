@@ -11,6 +11,7 @@ export default defineCliConfig({
      * Learn more at https://www.sanity.io/docs/studio/latest-version-of-sanity#k47faf43faf56
      */
     autoUpdates: true,
+    appId: 'mm213zelio7nox0wf89pl0a5',
   },
   /**
    * The site lives in the sibling repo ../my-website. TypeGen reads its GROQ queries
