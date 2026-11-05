@@ -3,7 +3,8 @@
 Standalone Sanity Studio holding the content for zachscroggins.com. Project overview (this repo, the Next.js site next to it, shared assets): [`../AGENTS.md`](../AGENTS.md). Read it first.
 
 - Sanity project `e3qg8tui` ("my-website"), dataset `production` (public), organization `oRFOMOXDU`.
-- `npm run dev` runs the Studio at http://localhost:3333. Auto-updates are on.
+- `npm run dev` runs the Studio at http://localhost:3333 (Presentation previews http://localhost:3000). Auto-updates are on.
+- Hosted at https://my-website-cms.sanity.studio (`npm run deploy`). `.env.production` points its Presentation Tool at https://zachscroggins.com.
 - Sanity skills live in `.agents/skills/` (symlinked into `.claude/skills/`): `sanity-best-practices` and `content-modeling-best-practices`. Read the matching reference before changing the schema.
 
 ## Content model (`schemaTypes/documents/`)
