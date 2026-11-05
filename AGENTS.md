@@ -4,8 +4,8 @@ Standalone Sanity Studio holding the content for zachscroggins.com. Project over
 
 - Sanity project `e3qg8tui` ("my-website"), dataset `production` (public), organization `oRFOMOXDU`.
 - `npm run dev` runs the Studio at http://localhost:3333 (Presentation previews http://localhost:3000). Auto-updates are on.
-- Hosted at https://my-website-cms.sanity.studio (`npm run deploy`). `.env.production` points its Presentation Tool at https://zachscroggins.com.
-- Sanity skills live in `.agents/skills/` (symlinked into `.claude/skills/`): `sanity-best-practices` and `content-modeling-best-practices`. Read the matching reference before changing the schema.
+- Hosted at https://my-website-cms.sanity.studio. Merging to `main` deploys it (`.github/workflows/deploy-studio.yml`, repo secret `SANITY_AUTH_TOKEN` with the Deploy Studio role); `npm run deploy` still works by hand. Markdown, `functions/` and `sanity.blueprint.ts` changes don't trigger it. `.env.production` points its Presentation Tool at https://zachscroggins.com.
+- Sanity skills live in `.agents/skills/` (symlinked into `.claude/skills/`; both gitignored, installed per machine from `skills-lock.json` with `npx skills`): `sanity-best-practices` and `content-modeling-best-practices`. Read the matching reference before changing the schema.
 
 ## Revalidation function (`sanity.blueprint.ts`, `functions/invalidate-tags/`)
 
