@@ -39,5 +39,13 @@
     "printWidth": 100,
     "semi": false,
     "singleQuote": true
+  },
+  "overrides": {
+    "undici": "^7.30.1",
+    "smol-toml": "^1.9.1",
+    "@vercel/frameworks": {
+      "js-yaml": "^3.15.2"
+    },
+    "minimatch": "^11.0.1"
   }
 }
