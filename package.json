@@ -30,7 +30,9 @@
     "@types/react": "^19.2.14",
     "eslint": "^10.8.1",
     "prettier": "^3.5",
-    "typescript": "~6.0"
+    "typescript": "~6.0",
+    "@sanity/blueprints": "0.33.0",
+    "@sanity/functions": "1.11.0"
   },
   "prettier": {
     "bracketSpacing": false,

@@ -7,6 +7,15 @@ Standalone Sanity Studio holding the content for zachscroggins.com. Project over
 - Hosted at https://my-website-cms.sanity.studio (`npm run deploy`). `.env.production` points its Presentation Tool at https://zachscroggins.com.
 - Sanity skills live in `.agents/skills/` (symlinked into `.claude/skills/`): `sanity-best-practices` and `content-modeling-best-practices`. Read the matching reference before changing the schema.
 
+## Revalidation function (`sanity.blueprint.ts`, `functions/invalidate-tags/`)
+
+- A sync tag invalidate Sanity Function. When published content changes, it POSTs the stale sync tags to `https://zachscroggins.com/api/revalidate-tags` (see `../my-website/app/api/revalidate-tags/route.ts`), then calls `done`, which lets the site's `<SanityLive waitFor="function">` refresh open pages. Always call `done`, even on errors.
+- Blueprint stack `production` (`ST-8smgi8hsjx`), scoped to `e3qg8tui.production`. `.sanity/` is gitignored; on a new machine run `npx sanity@latest blueprints init . --project-id e3qg8tui --stack-id ST-8smgi8hsjx --blueprint-type ts`.
+- Env: `SITE_URL` is set in the blueprint. `SANITY_REVALIDATE_SECRET` is a function env var (`npx sanity functions env add invalidate-tags SANITY_REVALIDATE_SECRET <value>`) and must match the site's Vercel env var.
+- Test locally against a running site: `LOCAL_SITE_URL=http://localhost:3000 SANITY_REVALIDATE_SECRET=<value> npx sanity@latest functions test invalidate-tags --data '{"syncTags":["s1:abc"]}'`.
+- Deploy: `npx sanity@latest blueprints plan`, then `npx sanity@latest blueprints deploy`. Logs: `npx sanity@latest functions logs invalidate-tags`. Only one sync tag function per dataset.
+- The function has its own `package.json` so its bundle doesn't pull in Studio packages. The CLI warns that a blueprint shouldn't sit next to a Studio; the warning is about lockfile placement (pnpm monorepos), and here the npm lockfile sits next to the blueprint.
+
 ## Content model (`schemaTypes/documents/`)
 
 | Type | What it is |
