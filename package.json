@@ -1,5 +1,5 @@
 {
-  "name": "my-website",
+  "name": "my-website-cms",
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
@@ -9,12 +9,15 @@
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
     "dev": "sanity dev",
-    "start": "sanity start"
+    "start": "sanity start",
+    "typegen": "sanity schema extract --enforce-required-fields --force && sanity typegen generate"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
+    "@sanity/code-input": "^7.3.14",
+    "@sanity/icons": "^5.2.3",
     "@sanity/vision": "^6.22.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -23,6 +26,7 @@
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^7",
+    "@types/node": "^26.6.6",
     "@types/react": "^19.2.14",
     "eslint": "^10.8.1",
     "prettier": "^3.5",
