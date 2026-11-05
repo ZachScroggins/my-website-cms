@@ -1,0 +1,38 @@
+# Deploys the Studio to https://my-website-cms.sanity.studio when changes land on main.
+# Needs the repository secret SANITY_AUTH_TOKEN: a project token with the Deploy Studio role.
+# The revalidation function (sanity.blueprint.ts, functions/) deploys separately with
+# `npx sanity@latest blueprints deploy`.
+name: Deploy Studio
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'functions/**'
+      - 'sanity.blueprint.ts'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-studio
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy Studio
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # The repo's own Sanity CLI, so CI deploys with the same version as local `npm run deploy`.
+      # .env.production (committed) points the hosted Presentation Tool at zachscroggins.com.
+      - run: npx sanity deploy --yes
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
